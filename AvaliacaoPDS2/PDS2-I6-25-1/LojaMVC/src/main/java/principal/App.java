@@ -36,17 +36,19 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-       ClienteDAO clienteDAO = new ClienteDAO();
+      // ClienteDAO clienteDAO = new ClienteDAO();
        
-       Cliente novoCliente = new Cliente();
-       novoCliente.setNome("Ana Maria");
-       novoCliente.setTelefone("11999999999");
-       novoCliente.setEndereco("rua das flores, 123");
-       novoCliente.setDataNascimento(Date.valueOf("1990-05-10"));
+      //Cliente novoCliente = new Cliente();
+      // novoCliente.setNome("Ana Maria");
+      // novoCliente.setTelefone("11999999999");
+       //novoCliente.setEndereco("rua das flores, 123");
+       //novoCliente.setDataNascimento(Date.valueOf("1990-05-10"));
        
-       clienteDAO.inserirCliente(novoCliente);
+      // clienteDAO.inserirCliente(novoCliente);
        
-       clienteDAO.listarClientes();
+       //clienteDAO.listarClientes();
+       
+       launch();
      }
     
 
