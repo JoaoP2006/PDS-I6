@@ -15,8 +15,8 @@ public class ProdutoDAO {
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getDescricao());
-            stmt.setLong(2, produto.getValor());
-            stmt.setInt(3, produto.getQuantidade_estoque());
+            stmt.setDouble(2, produto.getValor()); // Corrigido para double
+            stmt.setInt(3, produto.getQuantidadeEstoque()); // Corrigido nome do getter
 
             stmt.executeUpdate();
             System.out.println("Produto inserido com sucesso!");
@@ -36,11 +36,11 @@ public class ProdutoDAO {
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String descricao = rs.getString("descricao");
-                long valor = rs.getLong("valor");
+                double valor = rs.getDouble("valor"); // Corrigido para double
                 int quantidadeEstoque = rs.getInt("quantidade_estoque");
 
                 System.out.println("ID: " + id + " | Descrição: " + descricao +
-                        " | Valor: " + valor + " | Quantidade em Estoque: " + quantidadeEstoque);
+                        " | Valor: R$ " + valor + " | Quantidade em Estoque: " + quantidadeEstoque);
             }
 
         } catch (SQLException e) {

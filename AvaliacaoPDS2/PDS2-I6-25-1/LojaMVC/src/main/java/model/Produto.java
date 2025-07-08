@@ -1,14 +1,13 @@
 package model;
 
-import java.sql.Date;
-
 public class Produto {
     
-   
     private int id;
     private String descricao;
-    private long valor;
-    private int quantidade_estoque;
+    private double valor; // Corrigido de long para double
+    private int quantidadeEstoque; // Corrigido nome para padrão Java
+
+    // Getters e Setters
 
     public int getId() {
         return id;
@@ -26,21 +25,19 @@ public class Produto {
         this.descricao = descricao;
     }
 
-    public long getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(long valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
-    public int getQuantidade_estoque() {
-        return quantidade_estoque;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public void setQuantidade_estoque(int quantidade_estoque) {
-        this.quantidade_estoque = quantidade_estoque;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 }
-
-

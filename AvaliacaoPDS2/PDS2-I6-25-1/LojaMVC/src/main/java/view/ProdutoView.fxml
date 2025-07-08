@@ -9,16 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProdutoController">
    <children>
-      <Button fx:id="btnCadastrar" layoutX="65.0" layoutY="53.0" mnemonicParsing="false" onAction="#btnCadastrarClick" prefHeight="30.0" prefWidth="110.0" text="Cadastrar">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
-      <TextField fx:id="txtPesquisar" layoutX="206.0" layoutY="53.0" prefHeight="25.0" prefWidth="327.0">
-         <font>
-            <Font size="14.0" />
-         </font></TextField>
-      <TableView fx:id="tabelaUsuarios" layoutX="65.0" layoutY="114.0" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="470.0" stylesheets="@../../resources/css/tabelas.css" />
-      <Button fx:id="btnFechar" layoutX="245.0" layoutY="334.0" mnemonicParsing="false" onAction="#btnFecharClick" prefHeight="30.0" prefWidth="110.0" text="Fechar">
+      <Button fx:id="btnSalvar" layoutX="245.0" layoutY="356.0" mnemonicParsing="false" onAction="#btnSalvaProduto" prefHeight="30.0" prefWidth="110.0" text="Salvar Produto">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
@@ -27,5 +18,12 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <TextField fx:id="txtDescricao" layoutX="172.0" layoutY="68.0" prefHeight="25.0" prefWidth="349.0" />
+      <TextField fx:id="txtValor" layoutX="172.0" layoutY="103.0" prefHeight="25.0" prefWidth="349.0" />
+      <TextField fx:id="txtQuantidadeDeEstoque" layoutX="172.0" layoutY="136.0" prefHeight="25.0" prefWidth="349.0" />
+      <Label layoutX="28.0" layoutY="72.0" text="Descriçao" />
+      <Label layoutX="28.0" layoutY="107.0" text="Valor" />
+      <Label layoutX="28.0" layoutY="140.0" text="Quantidade de estoque" />
+      <TableView fx:id="tableProduto" layoutX="93.0" layoutY="200.0" prefHeight="130.0" prefWidth="430.0" />
    </children>
 </AnchorPane>

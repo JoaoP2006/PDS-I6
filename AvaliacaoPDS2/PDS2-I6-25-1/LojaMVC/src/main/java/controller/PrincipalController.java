@@ -17,13 +17,18 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import util.AlertaUtil;
 
 public class PrincipalController {
 
     private Stage stagePrincipal;
+
+    @FXML
+    private MenuItem menuCadastroCliente;
+
+    @FXML
+    private MenuItem menuCadastroProduto;
 
     @FXML
     private Label lblUsuario;
@@ -103,6 +108,36 @@ public class PrincipalController {
             System.out.println("Acesso restrito");
             menuRelatorios.setDisable(true);
         }
+    }
+
+
+    @FXML
+    void CadastrarClienteClick(ActionEvent event) throws IOException {
+ URL url = new File("src/main/java/view/ClienteView.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage telaCadastroUsuarios = new Stage();
+    telaCadastroUsuarios.setTitle("Cadastro de Clientes");
+    telaCadastroUsuarios.setScene(new Scene(root));
+    telaCadastroUsuarios.show();        
+        
+        
+        
+    }
+
+    @FXML
+    void menuCadastroProdutoClick(ActionEvent event) throws IOException {
+        
+        URL url = new File("src/main/java/view/ProdutoView.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage telaCadastroProduto = new Stage();
+    telaCadastroProduto.setTitle("Cadastro de Clientes");
+    telaCadastroProduto.setScene(new Scene(root));
+    telaCadastroProduto.show();
+
     }
 
 }

@@ -1,3 +1,4 @@
+controller\ClienteViewController.class
 controller\ProdutoController.class
 model\Usuario.class
 model\GenericDAO.class
@@ -12,7 +13,6 @@ model\ClienteDAO.class
 controller\CadastroUsuariosController.class
 model\Venda.class
 controller\PrincipalController.class
-controller\ClienteView.class
 principal\App.class
 dal\ConexaoBD.class
 controller\VendaController.class

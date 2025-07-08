@@ -7,8 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="377.0" prefWidth="567.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="ClienteView">
+<AnchorPane id="AnchorPane" prefHeight="377.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClienteViewController">
    <children>
       <Label layoutX="23.0" layoutY="70.0" text="Nome" />
       <Label layoutX="23.0" layoutY="104.0" text="Telefone" />
@@ -17,8 +16,8 @@
       <TextField fx:id="txtNome" layoutX="89.0" layoutY="66.0" prefHeight="25.0" prefWidth="449.0" />
       <TextField fx:id="txtTelefone" layoutX="89.0" layoutY="100.0" prefHeight="25.0" prefWidth="449.0" />
       <TextField fx:id="txtEndereco" layoutX="89.0" layoutY="131.0" prefHeight="25.0" prefWidth="449.0" />
-      <TextField fx:id="txtDataNasc" layoutX="143.0" layoutY="162.0" prefHeight="25.0" prefWidth="394.0" promptText="(formato: yyyy-mm-dd)" />
-      <Button layoutX="237.0" layoutY="338.0" mnemonicParsing="false" text="Salvar Clientes" />
+      <TextField fx:id="txtDataNascimento" layoutX="143.0" layoutY="162.0" prefHeight="25.0" prefWidth="394.0" promptText="(formato: yyyy-mm-dd)" />
+      <Button fx:id="btnSalvar" layoutX="237.0" layoutY="338.0" mnemonicParsing="false" onAction="#onClickSalvar" text="Salvar Clientes" />
       <ScrollPane layoutX="87.0" layoutY="199.0" prefHeight="124.0" prefWidth="443.0">
          <content>
             <TextArea fx:id="txtListaClientes" prefHeight="125.0" prefWidth="441.0" />
