@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
@@ -27,9 +26,7 @@ import util.AlertaUtil;
 public class LoginController {
 
     private Stage stageLogin;
-    private Connection conexao;
     private final LoginDAO dao = new LoginDAO();
-    private ArrayList<String> listaDados;
     private Usuario user;
 
     @FXML
@@ -65,22 +62,6 @@ public class LoginController {
     }
 
     public void verificarBanco() {
-//        this.conexao = ConexaoBD.conectar();
-//
-//        if (this.conexao != null) {
-//            System.out.println("Conectou no banco de dados");
-//        } else {
-//            System.out.println("Problemas na conexão com o banco de dados");
-//        }
-    
-//    if(dao.bancoOnline()){
-//        lblDB.setText("Banco de Dados: Online");
-//        lblDB.setStyle("-fx-text-fill: blue;");
-//    } else {
-//        lblDB.setText("Banco de Dados: Offline");
-//        lblDB.setStyle("-fx-text-fill: red;");
-//    }
-
        if(dao.bancoOnline()){
            File arquivo = new File("src/main/resources/icones/dbok.png");
            Image imagem = new Image(arquivo.toURI().toString());
@@ -90,7 +71,6 @@ public class LoginController {
            Image imagem = new Image(arquivo.toURI().toString());
            imgBancoOnline.setImage(imagem);
        }
-
     }
 
     public void abrirJanela() {
@@ -101,39 +81,24 @@ public class LoginController {
     public void processarLogin() throws IOException, SQLException {
         if (!dao.bancoOnline()) {
             AlertaUtil.mostrarErro("Erro", "Banco de dados desconectado!");
-        } else if (txtUsuario.getText() != null && !txtUsuario.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
-            listaDados = autenticar(txtUsuario.getText(),
-                    txtSenha.getText());
-            if (listaDados != null) {
-                AlertaUtil.mostrarInformacao("Informação", "Bem vindo "
-                        + listaDados.get(0) + " acesso liberado!" );
+        } else if (txtUsuario.getText() != null && !txtUsuario.getText().isEmpty() 
+                && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
+            user = dao.autenticar(txtUsuario.getText(), txtSenha.getText());
+            if (user != null) {
+                AlertaUtil.mostrarInformacao("Informação", "Bem vindo " + user.getNome() + ", acesso liberado!");
                 if (stageLogin != null) {
                     stageLogin.close();
                 }
-                abrirTelaPrincipal(listaDados);
+                abrirTelaPrincipal(user.getNome(), user.getPerfil());
             } else {
-//                System.out.println("Usuário e senha invalidos!");
-                  AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");
+                AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");
             }
         } else {
-//            System.out.println("Verifique as informações!");
-                AlertaUtil.mostrarErro("Erro", "Verifique as informações!");
+            AlertaUtil.mostrarErro("Erro", "Verifique as informações!");
         }
-
     }
 
-    private ArrayList<String> autenticar(String login, String senha) throws SQLException {
-        user = dao.autenticar(login, senha);
-        if (user != null) {
-            ArrayList<String> listaDados = new ArrayList<>();
-            listaDados.add(user.getNome());
-            listaDados.add(user.getPerfil());
-            return listaDados;
-        }
-        return null;
-    }
-
-    private void abrirTelaPrincipal(ArrayList<String> dados) throws MalformedURLException, IOException {
+    private void abrirTelaPrincipal(String nomeUsuario, String perfil) throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/Principal.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -143,11 +108,10 @@ public class LoginController {
         pc.setStage(telaPrincipal);
 
         telaPrincipal.setOnShown(evento -> {
-            pc.ajustarElementosJanela(dados);
+            pc.ajustarElementosJanela(nomeUsuario, perfil);
         });
 
         Scene scene = new Scene(root);
-        
         Image icone = new Image(getClass().getResourceAsStream("/icones/loja.png"));
         telaPrincipal.getIcons().add(icone);
 
@@ -155,5 +119,4 @@ public class LoginController {
         telaPrincipal.setScene(scene);
         telaPrincipal.show();
     }
-
 }

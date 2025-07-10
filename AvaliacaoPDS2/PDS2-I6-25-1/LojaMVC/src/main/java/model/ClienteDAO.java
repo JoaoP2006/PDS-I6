@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteDAO {
 
@@ -28,7 +30,8 @@ public class ClienteDAO {
         }
     }
 
-    public void listarClientes() {
+    public List<Cliente> listarClientes() {
+        List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM cliente";
 
         try (Connection conn = ConexaoBD.conectar();
@@ -36,18 +39,20 @@ public class ClienteDAO {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String nome = rs.getString("nome");
-                String telefone = rs.getString("telefone");
-                String endereco = rs.getString("endereco");
-                Date nascimento = rs.getDate("data_nascimento");
+                Cliente cliente = new Cliente();
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setTelefone(rs.getString("telefone"));
+                cliente.setEndereco(rs.getString("endereco"));
+                cliente.setDataNascimento(rs.getDate("data_nascimento"));
 
-                System.out.println("ID: " + id + " | Nome: " + nome + " | Telefone: " + telefone
-                        + " | Endereço: " + endereco + " | Nascimento: " + nascimento);
+                clientes.add(cliente);
             }
 
         } catch (SQLException e) {
             System.err.println("Erro ao listar clientes: " + e.getMessage());
         }
+
+        return clientes;
     }
 }

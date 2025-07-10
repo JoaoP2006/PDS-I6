@@ -1,13 +1,29 @@
 package model;
 
 import java.sql.Date;
+import java.math.BigDecimal;
 
 public class Venda {
-    
-      private int id;
-    private Date Data_compra;
-    private long Valor_total;
-    private String Cliente_id;
+    private int id;
+    private Date dataCompra;
+    private BigDecimal valorTotal;
+    private int idCliente;
+
+    public Venda() {
+    }
+
+    public Venda(int id, Date dataCompra, BigDecimal valorTotal, int idCliente) {
+        this.id = id;
+        this.dataCompra = dataCompra;
+        this.valorTotal = valorTotal;
+        this.idCliente = idCliente;
+    }
+
+    public Venda(Date dataCompra, BigDecimal valorTotal, int idCliente) {
+        this.dataCompra = dataCompra;
+        this.valorTotal = valorTotal;
+        this.idCliente = idCliente;
+    }
 
     public int getId() {
         return id;
@@ -17,28 +33,27 @@ public class Venda {
         this.id = id;
     }
 
-    public Date getData_compra() {
-        return Data_compra;
+    public Date getDataCompra() {
+        return dataCompra;
     }
 
-    public void setData_compra(Date Data_compra) {
-        this.Data_compra = Data_compra;
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
-    public long getValor_total() {
-        return Valor_total;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setValor_total(long Valor_total) {
-        this.Valor_total = Valor_total;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
-    public String getCliente_id() {
-        return Cliente_id;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setCliente_id(String Cliente_id) {
-        this.Cliente_id = Cliente_id;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
     }
-
 }

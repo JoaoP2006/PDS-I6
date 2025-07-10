@@ -1,6 +1,7 @@
 controller\ClienteViewController.class
 controller\ProdutoController.class
 model\Usuario.class
+model\ItemVendaDAO.class
 model\GenericDAO.class
 controller\LoginController.class
 model\LoginDAO.class
@@ -14,6 +15,7 @@ controller\CadastroUsuariosController.class
 model\Venda.class
 controller\PrincipalController.class
 principal\App.class
+model\ItemVenda.class
 dal\ConexaoBD.class
 controller\VendaController.class
 util\Validacoes.class

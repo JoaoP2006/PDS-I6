@@ -1,20 +1,41 @@
 package controller;
 
+import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.ClienteDAO;
 import util.AlertaUtil;
 
-public class ClienteViewController {
+public class ClienteViewController implements Initializable {
+
+    @FXML
+    private TableColumn<Cliente, String> colNome;
+
+    @FXML
+    private TableColumn<Cliente, String> colTelefone;
+
+    @FXML
+    private TableColumn<Cliente, String> colEndereco;
+
+    @FXML
+    private TableColumn<Cliente, Date> colNascimento;
 
     @FXML
     private Button btnSalvar;
@@ -30,10 +51,11 @@ public class ClienteViewController {
 
     @FXML
     private TextField txtTelefone;
-    
-    
-    private final DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    @FXML
+    private TableView<Cliente> TabelaCliente; 
+
+    private final DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     @FXML
     void onClickSalvar(ActionEvent event) throws SQLException {
@@ -69,8 +91,37 @@ public class ClienteViewController {
 
         AlertaUtil.mostrarInformacao("Sucesso", "Cliente salvo com sucesso!");
 
-        Stage stage = (Stage) btnSalvar.getScene().getWindow();
-        stage.close();
+        carregarClientes(); 
+
+        limparCampos(); 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        configurarColunas();
+        carregarClientes();
+    }
+
+    private void configurarColunas() {
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
+        colEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
+        colNascimento.setCellValueFactory(new PropertyValueFactory<>("dataNascimento"));
+    }
+
+    private void carregarClientes() {
+        ClienteDAO dao = new ClienteDAO();
+        
+        List<Cliente> lista = dao.listarClientes();
+        
+        ObservableList<Cliente> dados = FXCollections.observableArrayList(lista);
+        TabelaCliente.setItems(dados);
+    }
+
+    private void limparCampos() {
+        txtNome.clear();
+        txtTelefone.clear();
+        txtEndereco.clear();
+        txtDataNascimento.clear();
+    }
 }

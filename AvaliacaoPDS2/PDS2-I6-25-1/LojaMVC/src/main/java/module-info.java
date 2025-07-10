@@ -5,6 +5,8 @@ module principal.lojamvc {
     requires java.base;
 
     opens controller to javafx.fxml;
+    opens model to javafx.base;
+
     
     exports principal;
 }
